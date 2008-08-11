@@ -1,16 +1,16 @@
 = SearchableRecord
 
-A small Ruby on Rails plugin that makes the parsing of query parameters from
-URLs easy for resources, allowing the requester to control the items
-(records) shown in the resource's representation.
+SearchableRecord is a small Ruby on Rails plugin that makes the parsing of
+query parameters from URLs easy for resources, allowing the requester to
+control the items (records) shown in the resource's representation.
 
 The implementation is a helper module (a mixin) for ActiveRecord models. It
 is used by including SearchableRecord module in a model.
 
-The mixin provides a class method, <tt>find_queried</tt>, to the class that
-includes it. The method is a frontend to ActiveRecord::Base#find: it parses
-query parameters against the given rules and calls <tt>find</tt>
-accordingly, returning the results of <tt>find</tt>.
+The mixin provides a class method, <tt>SearchableRecord#find_queried</tt>,
+to the class that includes it. The method is a front-end to
+ActiveRecord::Base#find: it parses query parameters against the given rules
+and calls <tt>find</tt> accordingly, returning the results of <tt>find</tt>.
 
 == A usage example
 
