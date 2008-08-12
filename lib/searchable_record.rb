@@ -3,6 +3,18 @@ require 'util'
 
 # See SearchableRecord::ClassMethods#find_queried for usage documentation.
 module SearchableRecord
+  module Meta #:nodoc:
+    module VERSION #:nodoc:
+      MAJOR = 0
+      MINOR = 1
+      TINY  = 0
+
+      def self.to_s
+        [ MAJOR, MINOR, TINY ].join('.')
+      end
+    end
+  end
+
   def self.included(base_class)   #:nodoc:
     base_class.class_eval do
       extend ClassMethods

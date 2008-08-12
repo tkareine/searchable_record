@@ -1,0 +1,7 @@
+=== 0.x.0 / 2008-08-12
+
+* Improvements, such as TODO
+
+=== 0.0.1 / 2008-03-03
+
+* First release.

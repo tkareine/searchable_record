@@ -1,0 +1,11 @@
+History.txt
+init.rb
+Manifest.txt
+MIT-LICENSE.txt
+README.txt
+Rakefile
+lib/searchable_record.rb
+lib/util.rb
+test/searchable_record_test_helper.rb
+test/spec_searchable_record.rb
+test/spec_util.rb
