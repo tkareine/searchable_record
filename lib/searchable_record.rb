@@ -222,7 +222,7 @@ module SearchableRecord
             else
               column = rule
             end
-            
+
             cond_strs << "(#{column} #{match_op} :#{param})"
             cond_syms[param] = conversion_blk.call(query_params[param])
           end
@@ -232,11 +232,11 @@ module SearchableRecord
 
     def parse_datetime(cond_strs, cond_syms, query_params, rules, type)
       rule = rules[type]
-      cast_type = searchable_record_settings[:"cast_#{type}_as"]
+      cast_type = searchable_record_settings["cast_#{type}_as".to_sym]
 
       if rule.respond_to?(:to_hash)
         column = rule[:column]
-        
+
         # Use custom cast type.
         cast_type = rule[:cast_as] unless rule[:cast_as].nil?
       else
@@ -248,7 +248,7 @@ module SearchableRecord
       when :until then op = '<='
       else raise ArgumentError, "Could not determine comparison operator for datetime."
       end
-      
+
       cond_strs << "(#{column} #{op} cast(:#{type} as #{cast_type}))"
       cond_syms[type] = query_params[type]
     end

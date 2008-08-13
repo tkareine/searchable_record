@@ -4,13 +4,13 @@ require 'searchable_record'
 
 class Record; include SearchableRecord; end
 
-context "SearchableRecord, for finding queried records" do
-  setup do
+describe SearchableRecord, "for finding queried records" do
+  before(:each) do
     Record.stubs(:logger).returns(stub(:debug))
     #Record.stubs(:logger).returns(Logger.new(STDOUT))
   end
 
-  specify "should be able to modify default settings" do
+  it "should be able to modify default settings" do
     new_settings = {
       :cast_since_as     => 'time',
       :cast_until_as     => 'date',
@@ -21,20 +21,20 @@ context "SearchableRecord, for finding queried records" do
     org_settings = Record.searchable_record_settings.dup
 
     Record.searchable_record_settings = new_settings
-    Record.searchable_record_settings.should.equal new_settings
+    Record.searchable_record_settings.should == new_settings
 
     Record.searchable_record_settings = org_settings
-    Record.searchable_record_settings.should.equal org_settings
+    Record.searchable_record_settings.should == org_settings
   end
 
-  specify "should execute find with no parameters, discarding unrecognized parameters" do
+  it "should execute find with no parameters, discarding unrecognized parameters" do
     Record.expects(:find).times(2).with(:all, { })
 
     Record.find_queried(:all, { }, { })
     Record.find_queried(:all, { :foo => 'bar' }, { })
   end
 
-  specify "should execute find with a positive offset parameter" do
+  it "should execute find with a positive offset parameter" do
     Record.expects(:find).times(1).with(:all, { :offset => 1 })
 
     Record.find_queried(:all, { :offset => '1' }, { :offset => nil })
@@ -45,7 +45,7 @@ context "SearchableRecord, for finding queried records" do
     Record.find_queried(:all, { :offset => '4', :limit => '3' }, { :offset => nil })
   end
 
-  specify "should discard other than positive offset parameters" do
+  it "should discard other than positive offset parameters" do
     Record.expects(:find).times(4).with(:all, { })
 
     Record.find_queried(:all, { },                  { :offset => nil })
@@ -54,7 +54,7 @@ context "SearchableRecord, for finding queried records" do
     Record.find_queried(:all, { :offset => '-1' },  { :offset => nil })
   end
 
-  specify "should execute find with a positive limit parameter" do
+  it "should execute find with a positive limit parameter" do
     Record.expects(:find).times(1).with(:all, { :limit => 1 })
 
     Record.find_queried(:all, { :limit => '1' }, { :limit => nil })
@@ -65,7 +65,7 @@ context "SearchableRecord, for finding queried records" do
     Record.find_queried(:all, { :limit => '4', :offset => '3' }, { :limit => nil })
   end
 
-  specify "should discard other than positive limit parameters" do
+  it "should discard other than positive limit parameters" do
     Record.expects(:find).times(4).with(:all, { })
 
     Record.find_queried(:all, { },                 { :limit => nil })
@@ -74,14 +74,14 @@ context "SearchableRecord, for finding queried records" do
     Record.find_queried(:all, { :limit => '-1' },  { :limit => nil })
   end
 
-  specify "should execute find with sort parameter" do
-    Record.expects(:find).times(1).with(:all, { :order  => 'users.first_name' })
+  it "should execute find with sort parameter" do
+    Record.expects(:find).times(1).with(:all, { :order => 'users.first_name' })
 
     Record.find_queried(:all, { :sort => 'first_name' },
                               { :sort => { 'first_name' => 'users.first_name' } })
   end
 
-  specify "should execute find with reverse sort parameter" do
+  it "should execute find with reverse sort parameter" do
     Record.expects(:find).times(1).with(:all, { :order  => 'users.first_name desc' })
 
     Record.find_queried(:all, { :rsort => 'first_name' },
@@ -89,12 +89,12 @@ context "SearchableRecord, for finding queried records" do
                                 :rsort => nil })
   end
 
-  specify "should raise an exception if rsort is specified without sort rule" do
+  it "should raise an exception if rsort is specified without sort rule" do
     lambda { Record.find_queried(:all, { :rsort => 'first_name' },
-             { :rsort  => { 'first_name' => 'users.first_name' } }) }.should.raise(ArgumentError)
+             { :rsort  => { 'first_name' => 'users.first_name' } }) }.should raise_error(ArgumentError)
   end
 
-  specify "should execute find with sort parameter, favoring 'sort' over 'rsort'" do
+  it "should execute find with sort parameter, favoring 'sort' over 'rsort'" do
     Record.expects(:find).times(1).with(:all, { :order  => 'users.first_name' })
 
     Record.find_queried(:all, { :sort => 'first_name', :rsort => 'last_name' },
@@ -103,7 +103,7 @@ context "SearchableRecord, for finding queried records" do
                                 :rsort => nil })
   end
 
-  specify "should discard other than specified sort parameters" do
+  it "should discard other than specified sort parameters" do
     Record.expects(:find).times(1).with(:all, {  })
 
     Record.find_queried(:all, { :sort => 'first' },
@@ -117,7 +117,7 @@ context "SearchableRecord, for finding queried records" do
                                 :rsort => nil })
   end
 
-  specify "should execute find with since parameter, with default settings" do
+  it "should execute find with since parameter, with default settings" do
     Record.expects(:find).times(2).with(:all, { :conditions => [ '(users.created_at >= cast(:since as datetime))',
                                                                  { :since => '2008-02-26' } ] })
 
@@ -127,7 +127,7 @@ context "SearchableRecord, for finding queried records" do
                               { :since => { :column => 'users.created_at' } })
   end
 
-  specify "should execute find with since parameter, with custom settings" do
+  it "should execute find with since parameter, with custom settings" do
     Record.expects(:find).times(3).with(:all, { :conditions => [ '(users.time >= cast(:since as time))',
                                                                  { :since => '11:04' } ] })
 
@@ -147,7 +147,7 @@ context "SearchableRecord, for finding queried records" do
     Record.searchable_record_settings = org_settings
   end
 
-  specify "should execute find with until parameter, with default settings" do
+  it "should execute find with until parameter, with default settings" do
     Record.expects(:find).times(2).with(:all, { :conditions => [ '(users.created_at <= cast(:until as datetime))',
                                                                  { :until => '2008-04-28' } ] })
 
@@ -157,7 +157,7 @@ context "SearchableRecord, for finding queried records" do
                               { :until => { :column => 'users.created_at' } })
   end
 
-  specify "should execute find with until parameter, with custom settings" do
+  it "should execute find with until parameter, with custom settings" do
     Record.expects(:find).times(3).with(:all, { :conditions => [ '(users.time <= cast(:until as time))',
                                                                  { :until => '13:06' } ] })
 
@@ -177,7 +177,7 @@ context "SearchableRecord, for finding queried records" do
     Record.searchable_record_settings = org_settings
   end
 
-  specify "should execute find with pattern matching parameters" do
+  it "should execute find with pattern matching parameters" do
     Record.expects(:find).times(1).with(:all, :conditions => [ "(users.first_name like :name)",
                                                                { :name => '%john%' } ])
 
@@ -185,7 +185,7 @@ context "SearchableRecord, for finding queried records" do
                               { :patterns => { :name => 'users.first_name'} })
   end
 
-  specify "should execute find with a pattern matching parameter, with default settings" do
+  it "should execute find with a pattern matching parameter, with default settings" do
     Record.expects(:find).times(1).with(:all, :conditions => [ "(sites.status like :status)",
                                                                { :status => '%active%' } ])
 
@@ -193,7 +193,7 @@ context "SearchableRecord, for finding queried records" do
                               { :patterns => { :status => 'sites.status' } })
   end
 
-  specify "should execute find with a pattern matching parameter, with custom settings" do
+  it "should execute find with a pattern matching parameter, with custom settings" do
     Record.expects(:find).times(1).with(:all, :conditions => [ "(sites.domain like :domain)",
                                                                { :domain => '%www.example.fi%' } ])
 
@@ -219,7 +219,7 @@ context "SearchableRecord, for finding queried records" do
     Record.searchable_record_settings = org_settings
   end
 
-  specify "should execute find with multiple pattern matching parameters" do
+  it "should execute find with multiple pattern matching parameters" do
     results = [
      { :conditions => [ "(sites.domain like :domain) and (sites.status like :status)",
                       { :domain => '%www.another.example.fi%',
@@ -238,7 +238,7 @@ context "SearchableRecord, for finding queried records" do
                                                :status => 'sites.status' } })
   end
 
-  specify "should preserve additional options" do
+  it "should preserve additional options" do
     Record.expects(:find).times(1).with(:all, :include => [ :affiliates ],
                                         :conditions => [ "(sites.flags = 'fo') and (sites.domain like :domain)",
                                                          { :domain => '%www.still-works.com%' } ])
@@ -260,9 +260,9 @@ context "SearchableRecord, for finding queried records" do
                                 :include    => [ :affiliates ] })
   end
 
-  specify "should work with all rules combined" do
+  it "should work with all rules combined" do
     Item = Record
-  
+
     Item.expects(:find).times(1).with(:all,
                                       :include => [ :owners ],
                                       :order   => 'items.name desc',

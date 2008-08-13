@@ -1,6 +1,8 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 
 require 'rubygems'
-require 'test/unit'
-require 'test/spec'
 require 'mocha'
+
+Spec::Runner.configure do |config|
+  config.mock_with :mocha
+end

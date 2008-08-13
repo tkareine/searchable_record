@@ -96,25 +96,9 @@ documentation.
 
 == Installation
 
-In order to checkout the source code to the current working directory,
-execute:
+In order to checkout the source code, execute:
 
-  svn co http://searchable-rec.rubyforge.org/svn/trunk
-
-=== Installation with Subversion svn:externals to a Ruby on Rails project
-
-In the root directory of the project, execute:
-
-  svn propedit svn:externals vendor/plugins
-
-Add the following line to the file with an editor:
-  
-  searchable-rec http://searchable-rec.rubyforge.org/svn/trunk
-
-Save and exit the editor. Execute:
-  
-  svn ci -m 'Updated svn:external property for SearchableRecord.' vendor/plugins
-  svn up vendor/plugins
+  git clone git://gitorious.org/searchable-rec/mainline.git
 
 == Contacting
 

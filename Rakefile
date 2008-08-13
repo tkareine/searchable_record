@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'hoe'
+require 'spec/rake/spectask'
+
 $LOAD_PATH.unshift(File.dirname(__FILE__) + "/lib")
+
 require 'searchable_record'
 
 Hoe.new('searchable_record', SearchableRecord::Meta::VERSION.to_s) do |p|
@@ -17,6 +20,13 @@ Hoe.new('searchable_record', SearchableRecord::Meta::VERSION.to_s) do |p|
   p.remote_rdoc_dir = '' # Release to root
   p.changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
   p.extra_deps = ['active_support']
+end
+
+desc "Run the RSpecs."
+Spec::Rake::SpecTask.new('spec') do |t|
+  t.spec_files = FileList['test/**/*.rb']
+  t.spec_opts = ["--format", "specdoc"]
+  #t.warning = true
 end
 
 desc "Search unfinished parts of source code."
@@ -41,4 +51,3 @@ end
 #   t.rdoc_files.include('README')
 #   t.rdoc_files.include('lib/**/*.rb')
 # end
-
