@@ -24,7 +24,7 @@ end
 
 desc "Run the RSpecs."
 Spec::Rake::SpecTask.new('spec') do |t|
-  t.spec_files = FileList['test/**/*.rb']
+  t.spec_files = FileList['spec/**/*.rb']
   t.spec_opts = ["--format", "specdoc"]
   #t.warning = true
 end

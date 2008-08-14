@@ -1,6 +1,6 @@
 === 0.x.0 / 2008-08-12
 
-* Improvements, such as TODO
+* Changed specs to use RSpec syntax.
 
 === 0.0.1 / 2008-03-03
 
