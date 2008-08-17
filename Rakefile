@@ -6,6 +6,9 @@ $LOAD_PATH.unshift(File.dirname(__FILE__) + "/lib")
 
 require 'searchable_record'
 
+desc 'Default: run specs.'
+task :default => :spec
+
 Hoe.new('searchable_record', SearchableRecord::Meta::VERSION.to_s) do |p|
   p.name = "searchable_record"
   p.rubyforge_name = 'searchable-rec' # If different than lowercase project name
@@ -22,7 +25,7 @@ Hoe.new('searchable_record', SearchableRecord::Meta::VERSION.to_s) do |p|
   p.extra_deps = ['active_support']
 end
 
-desc "Run the RSpecs."
+desc "Run specs."
 Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/**/*.rb']
   t.spec_opts = ["--format", "specdoc"]
