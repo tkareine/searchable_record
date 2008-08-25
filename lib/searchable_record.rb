@@ -6,11 +6,11 @@ module SearchableRecord
   module Meta #:nodoc:
     module VERSION #:nodoc:
       MAJOR = 0
-      MINOR = 1
-      TINY  = 0
+      MINOR = 0
+      BUILD = 2
 
       def self.to_s
-        [ MAJOR, MINOR, TINY ].join('.')
+        [ MAJOR, MINOR, BUILD ].join('.')
       end
     end
   end

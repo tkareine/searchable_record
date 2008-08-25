@@ -1,5 +1,4 @@
 History.txt
-init.rb
 Manifest.txt
 MIT-LICENSE.txt
 Rakefile

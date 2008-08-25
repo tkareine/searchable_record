@@ -33,21 +33,3 @@ desc "Search unfinished parts of source code."
 task :todo do
   FileList['**/*.rb'].egrep /#.*(TODO|FIXME)/
 end
-
-# desc 'Spec test the plugin.'
-# Rake::TestTask.new(:spec) do |t|
-#   t.libs   << 'lib'
-#   t.options = '-rs'
-#   t.pattern = 'test/**/spec_*.rb'
-#   t.verbose = true
-# end
-# 
-# desc 'Generate documentation for the plugin.'
-# Rake::RDocTask.new(:rdoc) do |t|
-#   t.options << '--line-numbers' << '--inline-source'
-#   t.title    = 'SearchableRecord documentation'
-#   t.main     = 'README'
-#   t.rdoc_dir = 'rdoc'
-#   t.rdoc_files.include('README')
-#   t.rdoc_files.include('lib/**/*.rb')
-# end
