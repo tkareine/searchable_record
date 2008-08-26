@@ -1,4 +1,8 @@
-require 'active_support'
+unless defined? ActiveSupport
+  require 'rubygems'
+  gem 'activesupport'
+  require 'active_support'
+end
 require 'util'
 
 # See SearchableRecord::ClassMethods#find_queried for usage documentation.

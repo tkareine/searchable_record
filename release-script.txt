@@ -1,0 +1,10 @@
+In order to make a release, do
+
+mate lib/searchable_record.rb  # update version number
+mate History.txt               # describe changes
+rake publish_docs
+rake release VERSION=<releasename>
+git commit -a -v
+git tag -a release-<releasename> -m "release <releasename>"
+git push
+git push --tags

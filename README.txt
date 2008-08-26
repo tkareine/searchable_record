@@ -47,10 +47,10 @@ rules:
                                         # match the pattern with the default operator
     }
 
-The client wants to use the URL
+The client uses the URL
 <tt>http://example-site.org/items?limit=5&offset=4&rsort=name&since=2008-02-28&name=foo_bar</tt>
-to fetch a representation of the resource containing the items. This results
-to the following parameters:
+to fetch a representation of the resource containing the items. The action
+results to the following parameters:
     
     # => query_params = {
     #      'offset' => '4',
@@ -59,7 +59,7 @@ to the following parameters:
     #      'until'  => '2008-02-28',
     #      'name'   => 'foo_bar',
     #      ...
-    #      # plus Rails specific parameters, such as 'action' and 'controller'
+    #      # plus Rails-specific parameters, such as 'action' and 'controller'
     # }
 
 In addition, the application happens to require some options to be passed to
@@ -96,7 +96,23 @@ documentation.
 
 == Installation
 
-In order to checkout the source code, execute:
+In order to install the plugin as a Ruby gem for a Rails application,
+edit the <tt>environment.rb</tt> file of the application to contain the
+following line:
+
+  config.gem "searchable_record"
+
+(This requires Rails version 2.1 or above.)
+
+Then install the gem, either using the Rakefile of the Rails application:
+
+  rake gems:install
+
+...or with the <tt>gem</tt> tool:
+	
+  gem install searchable_record
+
+Use git to get the source code for modifications and hacks:
 
   git clone git://gitorious.org/searchable-rec/mainline.git
 

@@ -14,12 +14,12 @@ Hoe.new('searchable_record', SearchableRecord::Meta::VERSION.to_s) do |p|
   p.summary = "SearchableRecord is a small Ruby on Rails plugin that makes the parsing of
   query parameters from URLs easy for resources, allowing the requester to
   control the items (records) shown in the resource's representation."
-  p.description = p.paragraphs_of('README.txt', 1..4).join("\n\n")
+  p.description = p.paragraphs_of('README.txt', 1..3).join("\n\n")
   p.url = "http://searchable-rec.rubyforge.org"
   # p.clean_globs = ['test/actual'] # Remove this directory on "rake clean"
   p.remote_rdoc_dir = '' # Release to root
   p.changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
-  p.extra_deps = ['active_support']
+  p.extra_deps = ['activesupport']
 end
 
 desc "Run specs."
