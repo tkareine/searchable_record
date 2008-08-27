@@ -41,7 +41,7 @@ module SearchableRecord
     #
     # Parses the query parameters the client has given in the URL of the HTTP
     # request. With the query parameters, the client may set a limit, an
-    # offset, or an ordering to the items in the search result. In addition,
+    # offset, or an ordering for the items in the search result. In addition,
     # the client may limit the output by allowing only certain records that
     # match to specific patterns.
     #
@@ -98,7 +98,7 @@ module SearchableRecord
     # and +rsort+ rules (+rsort+ uses the rules of +sort+), the rules for
     # +since+ and +until+ are independent from each other.
     #
-    # For usage examples, see the example in README and the unit tests that
+    # For usage examples, see the example in README.txt and the specs that
     # come with the plugin.
     #
     # ==== Default settings for rules
@@ -117,14 +117,19 @@ module SearchableRecord
     # === Arguments
     #
     # +extend+::  The same as the first argument to <tt>find</tt> (such as <tt>:all</tt>).
-    # +query_params+::  The (unsafe) query parameters from the URL.
+    # +query_params+::  The (unsafe) query parameters from the URL as a Hash.
     # +rules+::  The parsing rules as a Hash.
     # +options+:: Additional options for <tt>find</tt>, such as <tt>:include => [ :an_association ]</tt>.
     #
     # === Return
     #
-    # The same as with ActiveRecord::Base#find.
+    # The same as with <tt>ActiveRecord::Base#find</tt>.
     def find_queried(extend, query_params, rules, options = { })
+      # Ensure the proper types of arguments.
+      query_params = query_params.to_hash
+      rules = rules.to_hash
+      options = options.to_hash
+
       query_params = preserve_allowed_query_params(query_params, rules)
 
       unless query_params.empty?

@@ -9,8 +9,9 @@ is used by including SearchableRecord module in a model.
 
 The mixin provides a class method, <tt>SearchableRecord#find_queried</tt>,
 to the class that includes it. The method is a front-end to
-ActiveRecord::Base#find: it parses query parameters against the given rules
-and calls <tt>find</tt> accordingly, returning the results of <tt>find</tt>.
+<tt>ActiveRecord::Base#find</tt>: it parses query parameters against the
+given rules and calls <tt>find</tt> accordingly, returning the results of
+<tt>find</tt>.
 
 == A usage example
 
@@ -30,69 +31,81 @@ The following example, although a bit contrived, allows the client to
    both (for a name, a conversion to the client supplied parameter must be
    applied before matching the name in the database).
 
-   
-These requirements for the query parameters are expressed as the following
+First, we need resource items. Let us presume the application allows its clients to query <tt>Item</tt> type of resources:
+
+  class Item < ActiveRecord::Base
+    include SearchableRecord
+  end
+
+By including SearchableRecord module to Item, the method <tt>find_queried</tt> becomes available. The method can be called, for example, in <tt>ItemController</tt> to parse the client's query parameters:
+
+  Item.find_queried(:all, query_params, rules, options)
+
+In the beginning of this example, we stated requirements what the clients are allowed to query. These requirements are expressed as the following
 rules:
    
-    rules = {
-      :limit    => nil,                 # key as a flag; the value for the key is not used
-      :offset   => nil,                 # key as a flag
-      :sort     => { 'name' => 'items.name', 'created' => 'items.created_at' },
-      :rsort    => nil,                 # rsort is allowed according to rules in :sort (key as a flag)
-      :since    => 'items.created_at',  # cast parameter value as the default type
-      :until    => 'items.created_at',  # cast parameter value as the default type
-      :patterns => { :type => 'items.type', # match the pattern with the default operator and converter
-                     :name => { :column    => 'items.name',
-                                :converter => lambda { |val| "%#{val.gsub('_', '.')}%" } } }
-                                        # match the pattern with the default operator
-    }
+  rules = {
+    :limit    => nil,                 # key as a flag; the value for the key is not used
+    :offset   => nil,                 # key as a flag
+    :sort     => { 'name' => 'items.name', 'created' => 'items.created_at' },
+    :rsort    => nil,                 # rsort is allowed according to rules in :sort (key as a flag)
+    :since    => 'items.created_at',  # cast parameter value as the default type
+    :until    => 'items.created_at',  # cast parameter value as the default type
+    :patterns => { :type => 'items.type', # match the pattern with the default operator and converter
+                   :name => { :column    => 'items.name',
+                              :converter => lambda { |val| "%#{val.gsub('_', '.')}%" } } }
+                                      # match the pattern with the default operator
+  }
 
-The client uses the URL
-<tt>http://example-site.org/items?limit=5&offset=4&rsort=name&since=2008-02-28&name=foo_bar</tt>
-to fetch a representation of the resource containing the items. The action
-results to the following parameters:
-    
-    # => query_params = {
-    #      'offset' => '4',
-    #      'limit'  => '5',
-    #      'rsort'  => 'name',
-    #      'until'  => '2008-02-28',
-    #      'name'   => 'foo_bar',
-    #      ...
-    #      # plus Rails-specific parameters, such as 'action' and 'controller'
-    # }
+These rules are fed to <tt>find_queried</tt> as the third argument.
 
-In addition, the application happens to require some options to be passed to
+In addition, the application may to require options to be passed to
 <tt>find</tt>:
     
-    options = {
-      :include    => [ :owners ],
-      :conditions => "items.flag = 'f'"
-    }
+  options = {
+    :include    => [ :owners ],
+    :conditions => "items.flag = 'f'"
+  }
 
-When <tt>find_queried</tt> is called, with
+These can be supplied to <tt>find_queried</tt> as the fourth argument. 
+
+The second argument to <tt>find_queried</tt> is the query parameters
+<tt>ItemController</tt> receives. For example, the client uses the URL
+<tt>http://example-site.org/items?limit=5&offset=4&rsort=name&since=2008-02-28&name=foo_bar</tt>
+to fetch a representation of the application's resource containing the
+items. The action results to the following parameters:
     
-    Item.find_queried(:all, query_params, rules, options)
+  query_params = params
 
-the result is the following call to <tt>find</tt>.
+  # => query_params = {
+  #      'offset' => '4',
+  #      'limit'  => '5',
+  #      'rsort'  => 'name',
+  #      'until'  => '2008-02-28',
+  #      'name'   => 'foo_bar',
+  #      ...
+  #      # plus Rails-specific parameters, such as 'action' and 'controller'
+  # }
+
+With these query parameters and arguments, <tt>find_queried</tt> calls <tt>find</tt> with the following arguments:
    
-    Item.find(:all,
-              :include => [ :owners ],
-              :order   => 'items.name desc',
-              :offset  => 4,
-              :limit   => 5,
-              :conditions => [ "(items.flag = 'f') and (items.created_at <= cast(:until as datetime)) and (items.name like :name)",
-                               { :until => '2008-02-28', :name => '%foo.bar%' } ])
+  Item.find(:all,
+            :include => [ :owners ],
+            :order   => 'items.name desc',
+            :offset  => 4,
+            :limit   => 5,
+            :conditions => [ "(items.flag = 'f') and (items.created_at <= cast(:until as datetime)) and (items.name like :name)",
+                             { :until => '2008-02-28', :name => '%foo.bar%' } ])
 
-The search result for <tt>find</tt> contains at most 5 items that are
+This particular search results to at most 5 items that are
 
 *  from offset 4 (that is, items from positions 5 to 9),
 *  sorted in descending order by items' names,
 *  updated since 2008-02-28, and
 *  have <tt>foo.bar</tt> in their name.
 
-See +find_queried+ method in SearchableRecord::ClassMethods for usage
-documentation.
+See <tt>find_queried</tt> method in SearchableRecord::ClassMethods for
+details.
 
 == Installation
 
@@ -109,7 +122,7 @@ Then install the gem, either using the Rakefile of the Rails application:
   rake gems:install
 
 ...or with the <tt>gem</tt> tool:
-	
+  
   gem install searchable_record
 
 Use git to get the source code for modifications and hacks:
