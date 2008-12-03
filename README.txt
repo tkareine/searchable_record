@@ -43,7 +43,7 @@ By including SearchableRecord module to Item, the method <tt>find_queried</tt> b
 
 In the beginning of this example, we stated requirements what the clients are allowed to query. These requirements are expressed as the following
 rules:
-   
+
   rules = {
     :limit    => nil,                 # key as a flag; the value for the key is not used
     :offset   => nil,                 # key as a flag
@@ -61,20 +61,20 @@ These rules are fed to <tt>find_queried</tt> as the third argument.
 
 In addition, the application may to require options to be passed to
 <tt>find</tt>:
-    
+
   options = {
     :include    => [ :owners ],
     :conditions => "items.flag = 'f'"
   }
 
-These can be supplied to <tt>find_queried</tt> as the fourth argument. 
+These can be supplied to <tt>find_queried</tt> as the fourth argument.
 
 The second argument to <tt>find_queried</tt> is the query parameters
 <tt>ItemController</tt> receives. For example, the client uses the URL
 <tt>http://example-site.org/items?limit=5&offset=4&rsort=name&since=2008-02-28&name=foo_bar</tt>
 to fetch a representation of the application's resource containing the
 items. The action results to the following parameters:
-    
+
   query_params = params
 
   # => query_params = {
@@ -88,7 +88,7 @@ items. The action results to the following parameters:
   # }
 
 With these query parameters and arguments, <tt>find_queried</tt> calls <tt>find</tt> with the following arguments:
-   
+
   Item.find(:all,
             :include => [ :owners ],
             :order   => 'items.name desc',
@@ -119,23 +119,23 @@ following line:
 
 Then install the gem, either using the Rakefile of the Rails application:
 
-  rake gems:install
+  $ rake gems:install
 
 ...or with the <tt>gem</tt> tool:
-  
-  gem install searchable_record
+
+  $ gem install searchable_record
 
 Use git to get the source code for modifications and hacks:
 
-  git clone git://gitorious.org/searchable-rec/mainline.git
+  $ git clone git://gitorious.org/searchable-rec/mainline.git
 
 == Contacting
 
 Please send comments, suggestions, bugs, or patches by email to Tuomas
 Kareinen < tkareine (at) gmail (dot) com >.
 
-== Legal note
+== Legal notes
 
 Copyright (c) 2008 Tuomas Kareinen.
 
-SearchableRecord plugin is licensed under the MIT license.
+This software is licensed under the terms of the MIT license.
