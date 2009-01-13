@@ -1,6 +1,5 @@
 History.txt
 Manifest.txt
-MIT-LICENSE.txt
 Rakefile
 README.txt
 lib/searchable_record.rb

@@ -31,17 +31,21 @@ The following example, although a bit contrived, allows the client to
    both (for a name, a conversion to the client supplied parameter must be
    applied before matching the name in the database).
 
-First, we need resource items. Let us presume the application allows its clients to query <tt>Item</tt> type of resources:
+First, we need resource items. Let us presume the application allows its
+clients to query <tt>Item</tt> type of resources:
 
   class Item < ActiveRecord::Base
     include SearchableRecord
   end
 
-By including SearchableRecord module to Item, the method <tt>find_queried</tt> becomes available. The method can be called, for example, in <tt>ItemController</tt> to parse the client's query parameters:
+By including SearchableRecord module to Item, the method
+<tt>find_queried</tt> becomes available. The method can be called, for
+example, in <tt>ItemController</tt> to parse the client's query parameters:
 
   Item.find_queried(:all, query_params, rules, options)
 
-In the beginning of this example, we stated requirements what the clients are allowed to query. These requirements are expressed as the following
+In the beginning of this example, we stated requirements what the clients
+are allowed to query. These requirements are expressed as the following
 rules:
 
   rules = {
@@ -87,7 +91,8 @@ items. The action results to the following parameters:
   #      # plus Rails-specific parameters, such as 'action' and 'controller'
   # }
 
-With these query parameters and arguments, <tt>find_queried</tt> calls <tt>find</tt> with the following arguments:
+With these query parameters and arguments, <tt>find_queried</tt> calls
+<tt>find</tt> with the following arguments:
 
   Item.find(:all,
             :include => [ :owners ],
@@ -109,9 +114,9 @@ details.
 
 == Installation
 
-In order to install the plugin as a Ruby gem for a Rails application,
-edit the <tt>environment.rb</tt> file of the application to contain the
-following line:
+In order to install the plugin as a Ruby gem for a Rails application, edit
+the <tt>environment.rb</tt> file of the application to contain the following
+line:
 
   config.gem "searchable_record"
 
@@ -131,11 +136,29 @@ Use git to get the source code for modifications and hacks:
 
 == Contacting
 
-Please send comments, suggestions, bugs, or patches by email to Tuomas
-Kareinen < tkareine (at) gmail (dot) com >.
+Please send feedback by email to Tuomas Kareinen < tkareine (at) gmail (dot)
+com >.
 
 == Legal notes
 
-Copyright (c) 2008 Tuomas Kareinen.
+This software is licensed under the terms of the "MIT license":
 
-This software is licensed under the terms of the MIT license.
+Copyright (c) 2008-2009 Tuomas Kareinen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
