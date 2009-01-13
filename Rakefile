@@ -16,9 +16,9 @@ SearchableRecord is a small Ruby on Rails plugin that makes the parsing of
 query parameters from URLs easy for resources, allowing the requester to
 control the items (records) shown in the resource's representation.
   END
-  p.description = p.paragraphs_of('README.txt', 1..3).join("\n\n")
+  #p.description = p.paragraphs_of('README.txt', 1..3).join("\n\n")
   p.url = "http://searchable-rec.rubyforge.org"
-  # p.clean_globs = ['test/actual'] # Remove this directory on "rake clean".
+  #p.clean_globs = ['test/actual'] # Remove this directory on "rake clean".
   p.remote_rdoc_dir = '' # Release to root.
   p.changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
   p.extra_deps = ['activesupport']
@@ -29,6 +29,11 @@ Spec::Rake::SpecTask.new('spec') do |t|
   t.spec_files = FileList['spec/**/*.rb']
   t.spec_opts = ["--format", "specdoc"]
   #t.warning = true
+end
+
+desc "Find code smells."
+task :roodi do
+  sh("roodi '**/*.rb'")
 end
 
 desc "Search unfinished parts of source code."

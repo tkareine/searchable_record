@@ -252,26 +252,30 @@ module SearchableRecord
     def parse_patterns(cond_strs, cond_syms, query_params, rules)
       if rules[:patterns]
         rules[:patterns].each do |param, rule|
-          if query_params[param]
-            match_op = searchable_record_settings[:pattern_operator]
-            conversion_blk = searchable_record_settings[:pattern_converter]
-
-            if rule.respond_to?(:to_hash)
-              column = rule[:column]
-
-              # Use custom pattern match operator.
-              match_op = rule[:operator] unless rule[:operator].nil?
-
-              # Use custom converter.
-              conversion_blk = rule[:converter] unless rule[:converter].nil?
-            else
-              column = rule
-            end
-
-            cond_strs << "(#{column} #{match_op} :#{param})"
-            cond_syms[param] = conversion_blk.call(query_params[param])
-          end
+          parse_pattern(cond_strs, cond_syms, query_params, param, rule)
         end
+      end
+    end
+
+    def parse_pattern(cond_strs, cond_syms, query_params, param, rule)
+      if query_params[param]
+        match_op = searchable_record_settings[:pattern_operator]
+        conversion_blk = searchable_record_settings[:pattern_converter]
+
+        if rule.respond_to?(:to_hash)
+          column = rule[:column]
+
+          # Use custom pattern match operator.
+          match_op = rule[:operator] unless rule[:operator].nil?
+
+          # Use custom converter.
+          conversion_blk = rule[:converter] unless rule[:converter].nil?
+        else
+          column = rule
+        end
+
+        cond_strs << "(#{column} #{match_op} :#{param})"
+        cond_syms[param] = conversion_blk.call(query_params[param])
       end
     end
 
