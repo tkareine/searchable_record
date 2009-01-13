@@ -50,7 +50,7 @@ module SearchableRecord
     # explicitly stated in the rules are silently discarded.
     #
     # Essentially, the method is a frontend for
-    # ActiveRecord::Base#find. The method
+    # <tt>ActiveRecord::Base#find</tt>. The method
     #
     # 1.  parses the query parameters the client has given in the URL for
     #     the HTTP request (+query_params+) against the rules (+rules+), and
