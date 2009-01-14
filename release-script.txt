@@ -1,7 +1,7 @@
 In order to make a release, do
 
-mate lib/searchable_record/version.rb		# update version number
-mate CHANGELOG.rdoc            					# describe changes
+mate lib/searchable_record/version.rb   # update version number
+mate CHANGELOG.rdoc                     # describe changes
 rake publish_docs
 rake release
 git commit -am "Bump to release-<version>."
