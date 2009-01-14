@@ -1,0 +1,11 @@
+History.txt
+lib/searchable_record/core.rb
+lib/searchable_record/util.rb
+lib/searchable_record/version.rb
+lib/searchable_record.rb
+Manifest
+Rakefile
+README.rdoc
+spec/searchable_record_spec.rb
+spec/searchable_record_spec_helper.rb
+spec/util_spec.rb

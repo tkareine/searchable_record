@@ -1,9 +1,0 @@
-History.txt
-Manifest.txt
-Rakefile
-README.txt
-lib/searchable_record.rb
-lib/util.rb
-spec/searchable_record_spec_helper.rb
-spec/searchable_record_spec.rb
-spec/util_spec.rb

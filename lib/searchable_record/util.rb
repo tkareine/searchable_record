@@ -6,7 +6,7 @@ module SearchableRecord
       dup_hash = { }
 
       preserved_keys.to_a.each do |key|
-        if !hash[key.to_s].blank?         # try to find first with 'key'; if that fails
+        if !hash[key.to_s].blank?         # try to find first with "key"; if that fails
           dup_hash[key] = hash[key.to_s]
         elsif !hash[key].blank?           # ...then with :key
           dup_hash[key] = hash[key]

@@ -1,32 +1,30 @@
-require 'rubygems'
-require 'hoe'
-require 'spec/rake/spectask'
+require "rubygems"
+require "spec/rake/spectask"
+require File.dirname(__FILE__) << "/lib/searchable_record/version"
+require "echoe"
 
-$LOAD_PATH.unshift(File.dirname(__FILE__) + "/lib")
+task :default => :spec
 
-require 'searchable_record'
-
-Hoe.new('searchable_record', SearchableRecord::Meta::VERSION.to_s) do |p|
-  p.name = "searchable_record"
-  p.rubyforge_name = 'searchable-rec' # If different than the project name in lowercase.
+Echoe.new("searchable_record") do |p|
   p.author = "Tuomas Kareinen"
-  p.email = 'tkareine@gmail.com'
+  p.email = "tkareine@gmail.com"
+  p.project = "searchable-rec" # If different than the project name in lowercase.
+  p.version = SearchableRecord::Version.to_s
+  p.url = "http://searchable-rec.rubyforge.org"
   p.summary =<<-END
 SearchableRecord is a small Ruby on Rails plugin that makes the parsing of
 query parameters from URLs easy for resources, allowing the requester to
 control the items (records) shown in the resource's representation.
   END
-  #p.description = p.paragraphs_of('README.txt', 1..3).join("\n\n")
-  p.url = "http://searchable-rec.rubyforge.org"
-  #p.clean_globs = ['test/actual'] # Remove this directory on "rake clean".
-  p.remote_rdoc_dir = '' # Release to root.
-  p.changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
-  p.extra_deps = ['activesupport']
+  #p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
+  p.runtime_dependencies = %w(activesupport)
+  p.ignore_pattern = "release-script.txt"
+  p.rdoc_pattern = ["README.rdoc", "lib/**/*.rb"]
 end
 
 desc "Run specs."
-Spec::Rake::SpecTask.new('spec') do |t|
-  t.spec_files = FileList['spec/**/*.rb']
+Spec::Rake::SpecTask.new("spec") do |t|
+  t.spec_files = FileList["spec/**/*.rb"]
   t.spec_opts = ["--format", "specdoc"]
   #t.warning = true
 end
@@ -38,5 +36,5 @@ end
 
 desc "Search unfinished parts of source code."
 task :todo do
-  FileList['**/*.rb'].egrep /#.*(TODO|FIXME)/
+  FileList["**/*.rb"].egrep /#.*(TODO|FIXME)/
 end

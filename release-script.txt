@@ -1,12 +1,10 @@
-# Copied and modified from William Morgan's Trollop project. Thanks!
-
 In order to make a release, do
 
-mate lib/searchable_record.rb  # update version number
-mate History.txt               # describe changes
+mate lib/searchable_record/version.rb		# update version number
+mate History.txt               					# describe changes
 rake publish_docs
 rake release VERSION=<version>
-git commit -a -v
-git tag -a release-<version> -m "release <version>"
+git commit -am "Bump to release-<version>."
+git tag release-<version>
 git push
 git push --tags

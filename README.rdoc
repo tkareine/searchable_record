@@ -51,12 +51,12 @@ rules:
   rules = {
     :limit    => nil,                 # key as a flag; the value for the key is not used
     :offset   => nil,                 # key as a flag
-    :sort     => { 'name' => 'items.name', 'created' => 'items.created_at' },
+    :sort     => { "name" => "items.name", "created" => "items.created_at" },
     :rsort    => nil,                 # rsort is allowed according to rules in :sort (key as a flag)
-    :since    => 'items.created_at',  # cast parameter value as the default type
-    :until    => 'items.created_at',  # cast parameter value as the default type
-    :patterns => { :type => 'items.type', # match the pattern with the default operator and converter
-                   :name => { :column    => 'items.name',
+    :since    => "items.created_at",  # cast parameter value as the default type
+    :until    => "items.created_at",  # cast parameter value as the default type
+    :patterns => { :type => "items.type", # match the pattern with the default operator and converter
+                   :name => { :column    => "items.name",
                               :converter => lambda { |val| "%#{val.gsub('_', '.')}%" } } }
                                       # match the pattern with the default operator
   }
@@ -96,11 +96,11 @@ With these query parameters and arguments, <tt>find_queried</tt> calls
 
   Item.find(:all,
             :include => [ :owners ],
-            :order   => 'items.name desc',
+            :order   => "items.name desc",
             :offset  => 4,
             :limit   => 5,
             :conditions => [ "(items.flag = 'f') and (items.created_at <= cast(:until as datetime)) and (items.name like :name)",
-                             { :until => '2008-02-28', :name => '%foo.bar%' } ])
+                             { :until => "2008-02-28", :name => "%foo.bar%" } ])
 
 This particular search results to at most 5 items that are
 
