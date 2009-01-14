@@ -1,3 +1,7 @@
+=== 0.0.3 released 2009-01-14
+
+* Small code refactorization, documentation clarifications.
+
 === 0.0.2 released 2008-08-26
 
 * Changed specs to use RSpec syntax instead of test/spec.
