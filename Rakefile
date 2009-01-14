@@ -16,10 +16,9 @@ SearchableRecord is a small Ruby on Rails plugin that makes the parsing of
 query parameters from URLs easy for resources, allowing the requester to
 control the items (records) shown in the resource's representation.
   END
-  #p.changes = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.runtime_dependencies = %w(activesupport)
   p.ignore_pattern = "release-script.txt"
-  p.rdoc_pattern = ["README.rdoc", "lib/**/*.rb"]
+  p.rdoc_pattern = ["*.rdoc", "lib/**/*.rb"]
 end
 
 desc "Run specs."
