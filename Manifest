@@ -1,4 +1,4 @@
-History.txt
+CHANGELOG.rdoc
 lib/searchable_record/core.rb
 lib/searchable_record/util.rb
 lib/searchable_record/version.rb
