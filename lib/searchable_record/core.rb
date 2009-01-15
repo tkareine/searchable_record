@@ -188,7 +188,7 @@ module SearchableRecord
       cond_syms = { }
 
       # The hash query_params is not empty, therefore, it contains at least
-      # some of the allowed query parameters (as Symbols) below. Those
+      # some of the allowed query parameters (as symbols) below. Those
       # parameters that are not identified are ignored silently.
 
       parse_since_and_until(cond_strs, cond_syms, query_params, rules)
