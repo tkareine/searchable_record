@@ -2,10 +2,10 @@ module SearchableRecord
   module Version #:nodoc:
     MAJOR = 0
     MINOR = 0
-    BUILD = 3
+    BUILD = 4
 
     def self.to_s
-      [ MAJOR, MINOR, BUILD ].join('.')
+      [ MAJOR, MINOR, BUILD ].join(".")
     end
   end
 end
