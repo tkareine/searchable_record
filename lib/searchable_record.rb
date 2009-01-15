@@ -4,6 +4,6 @@ unless defined? ActiveSupport
   require "active_support"
 end
 
-%w(util version core).each do |file|
+%w(version util core).each do |file|
   require "searchable_record/#{file}"
 end

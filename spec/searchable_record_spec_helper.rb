@@ -1,4 +1,6 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__) + "/../lib")
+["/../lib", "/../lib/searchable_record"].each do |file|
+  $LOAD_PATH.unshift(File.dirname(__FILE__) << file)
+end
 
 require "rubygems"
 require "mocha"

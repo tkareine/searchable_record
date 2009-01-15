@@ -27,7 +27,7 @@ module SearchableRecord
     # records that match to specific patterns.
     #
     # What the client user is allowed to query is defined by specific rules
-    # passed to the method as a Hash argument. Query parameters that are not
+    # passed to the method as a hash argument. Query parameters that are not
     # explicitly stated in the rules are silently discarded.
     #
     # Essentially, the method is a frontend for
@@ -39,7 +39,7 @@ module SearchableRecord
     #
     # ==== Parsing rules
     #
-    # The parsing rules must be given as a Hash. The recognized keys are the
+    # The parsing rules must be given as a hash. The recognized keys are the
     # following:
     #
     # *  <tt>:limit</tt>, allowing limiting the number of matching items
@@ -52,9 +52,9 @@ module SearchableRecord
     #    integer value.
     # *  <tt>:sort</tt>, which determines the ordering of matching items
     #    (the same effect as with the <tt>:order</tt> option of
-    #    <tt>find</tt>). The value is a Hash of
+    #    <tt>find</tt>). The value is a hash of
     #    <tt>"<parameter_value>" => "<table>.<column>"</tt> pairs. The rule
-    #    enables query parameter "sort" that accepts keys from the Hash as
+    #    enables query parameter "sort" that accepts keys from the hash as
     #    its legal values.
     # *  <tt>:rsort</tt>, for reverse sort. Uses the rules of
     #    <tt>:sort</tt>; thus, use +nil+ as the value if you want to enable
@@ -62,18 +62,18 @@ module SearchableRecord
     # *  <tt>:since</tt>, which sets a lower timedate limit. The value is
     #    either a string naming the database table column that has
     #    timestamps (using the type from default settings'
-    #    <tt>:cast_since_as</tt> entry) or a Hash that contains entries like
+    #    <tt>:cast_since_as</tt> entry) or a hash that contains entries like
     #    <tt>:column => "<table>.<column>"</tt> and
     #    <tt>:cast_as => "<sql_timedate_type>"</tt>. The rule enables query
     #    parameter "since" that accepts timedate values.
     # *  <tt>:until</tt>, which sets an upper timedate limit. It is used
     #    like <tt>:since</tt>.
-    # *  <tt>:patterns</tt>, where the value is a Hash containing patterns.
-    #    The keys in the Hash correspond to additional query parameters,
+    # *  <tt>:patterns</tt>, where the value is a hash containing patterns.
+    #    The keys in the hash correspond to additional query parameters,
     #    while the corresponding values to the keys correspond to database
     #    table columns. For each pattern, the value is either directly a
-    #    string, or a Hash containing an entry like
-    #    <tt>:column => "<table>.<column>"</tt>. A pattern's Hash may
+    #    string, or a hash containing an entry like
+    #    <tt>:column => "<table>.<column>"</tt>. A pattern's hash may
     #    contain two optional entries in addition to <tt>:column</tt>:
     #    <tt>:converter => lambda { |val| <conversion_operation_for_val> }</tt>
     #    and <tt>:operator => "<sql_pattern_operator>"</tt>.
@@ -99,7 +99,7 @@ module SearchableRecord
     #
     # The default settings for the rules are accessible and modifiable by
     # calling the method +searchable_record_settings+. The settings are
-    # stored as a Hash; the following keys are recognized:
+    # stored as a hash; the following keys are recognized:
     #
     # *  <tt>:cast_since_as</tt>,
     # *  <tt>:cast_until_as</tt>,
@@ -111,8 +111,8 @@ module SearchableRecord
     # === Arguments
     #
     # +extend+::  The same as the first argument to <tt>find</tt> (such as <tt>:all</tt>).
-    # +query_params+::  The (unsafe) query parameters from the URL as a Hash.
-    # +rules+::  The parsing rules as a Hash.
+    # +query_params+::  The (unsafe) query parameters from the URL as a hash.
+    # +rules+::  The parsing rules as a hash.
     # +options+:: Additional options for <tt>find</tt>, such as <tt>:include => [ :an_association ]</tt>.
     #
     # === Return
