@@ -1,4 +1,4 @@
-require File.join(File.dirname(__FILE__) << "/searchable_record_spec_helper")
+require File.dirname(__FILE__) << "/searchable_record_spec_helper"
 require "active_support/core_ext/blank"
 require "util"
 
