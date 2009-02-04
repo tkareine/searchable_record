@@ -10,7 +10,7 @@ Echoe.new("searchable_record") do |p|
   p.email = "tkareine@gmail.com"
   p.project = "searchable-rec" # If different than the project name in lowercase.
   p.version = SearchableRecord::Version.to_s
-  p.url = "http://searchable-rec.rubyforge.org"
+  p.url = "http://searchable-rec.rubyforge.org/searchable_record/"
   p.summary =<<-END
 SearchableRecord is a small Ruby on Rails plugin that makes the parsing of
 query parameters from URLs easy for resources, allowing the requester to
