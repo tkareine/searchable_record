@@ -3,6 +3,7 @@
 end
 
 require "rubygems"
+require "active_support"
 require "mocha"
 
 Spec::Runner.configure do |config|
