@@ -13,6 +13,8 @@ to the class that includes it. The method is a front-end to
 given rules and calls <tt>find</tt> accordingly, returning the results of
 <tt>find</tt>.
 
+The plugin is compatible with Ruby 1.9.1.
+
 == A usage example
 
 The following example, although a bit contrived, allows the client to
