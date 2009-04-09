@@ -1,6 +1,6 @@
 module SearchableRecord
-  module Meta #:nodoc:
-    module VERSION
+  module Meta   #:nodoc:
+    module VERSION  #:nodoc:
       MAJOR = 0
       MINOR = 0
       BUILD = 5
