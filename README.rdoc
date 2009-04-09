@@ -132,7 +132,7 @@ Then install the gem, either using the Rakefile of the Rails application:
 
 Use git to get the source code for modifications and hacks:
 
-  $ git clone git://gitorious.org/searchable-rec/mainline.git
+  $ git clone git://github.com/tuomas/searchable_record.git
 
 == Contacting
 
