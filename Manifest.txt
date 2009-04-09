@@ -1,11 +1,11 @@
 CHANGELOG.rdoc
+lib/searchable_record.rb
 lib/searchable_record/core.rb
 lib/searchable_record/util.rb
 lib/searchable_record/version.rb
-lib/searchable_record.rb
 Rakefile
 README.rdoc
 spec/core_spec.rb
 spec/searchable_record_spec_helper.rb
 spec/util_spec.rb
-Manifest
+Manifest.txt
