@@ -17,11 +17,11 @@ module SearchableRecord
     end
 
     def self.parse_positive_int(str)
-      integer = str.to_i
-      if integer > 0    # nil.to_i == 0
-        return integer
+      value = str.to_i
+      if value > 0    # nil.to_i == 0
+        value
       else
-        return nil
+        nil
       end
     end
   end
