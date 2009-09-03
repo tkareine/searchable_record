@@ -4,8 +4,8 @@ $EDITOR lib/searchable_record/meta.rb   # update version number
 $EDITOR CHANGELOG.rdoc                  # describe changes
 git diff                                # review the changes
 rake publish_docs
-rake release
-git commit -am "Bump to release-<version>."
-git tag release-<version>
+rake release VERSION=x.y.z
+git commit -am "Bump to release-x.y.z."
+git tag release-x.y.z
 git push
 git push --tags
