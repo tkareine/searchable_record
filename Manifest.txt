@@ -1,8 +1,8 @@
 CHANGELOG.rdoc
 lib/searchable_record.rb
 lib/searchable_record/core.rb
+lib/searchable_record/meta.rb
 lib/searchable_record/util.rb
-lib/searchable_record/version.rb
 Rakefile
 README.rdoc
 spec/core_spec.rb
