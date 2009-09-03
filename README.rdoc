@@ -124,13 +124,10 @@ line:
 
 (This requires Rails version 2.1 or above.)
 
-Then install the gem, either using the Rakefile of the Rails application:
+Then install the gem:
 
   $ rake gems:install
-
-...or with the <tt>gem</tt> tool:
-
-  $ gem install searchable_record
+  $ rake gems:unpack
 
 Use git to get the source code for modifications and hacks:
 
