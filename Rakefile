@@ -34,22 +34,8 @@ control the items (records) shown in the resource's representation.
   }
 
   self.rubyforge_name = "searchable-rec"
-end
 
-require "spec/rake/spectask"
-desc "Run specs"
-Spec::Rake::SpecTask.new(:spec) do |t|
-  t.spec_files = FileList["spec/**/*.rb"]
-  t.spec_opts = ["--colour --format progress --loadby mtime"]
-  #t.warning = true
-end
-
-desc "Run specs with RCov"
-Spec::Rake::SpecTask.new(:rcov) do |t|
-  t.spec_files = FileList["spec/**/*.rb"]
-  t.spec_opts = ["--format", "specdoc"]
-  t.rcov = true
-  t.rcov_opts = ["--exclude", "spec"]
+  self.rspec_options = ["--colour --format progress --loadby mtime"]
 end
 
 desc "Find code smells"

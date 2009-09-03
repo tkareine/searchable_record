@@ -1,6 +1,5 @@
-require File.dirname(__FILE__) << "/searchable_record_spec_helper"
-require "logger"
-require "searchable_record"
+require "spec_helper"
+#require "logger"
 
 class Record; include SearchableRecord; end
 

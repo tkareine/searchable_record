@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) << "/searchable_record_spec_helper"
-require "util"
+require "spec_helper"
 
 include SearchableRecord
 
-describe Util do
+describe SearchableRecord::Util do
+
   it "should parse positive integers" do
     Util.parse_positive_int("1").should == 1
     Util.parse_positive_int("1sdfgsdf").should == 1
