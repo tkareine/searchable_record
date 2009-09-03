@@ -7,6 +7,6 @@ MIT-LICENSE.txt
 Rakefile
 README.rdoc
 spec/core_spec.rb
-spec/searchable_record_spec_helper.rb
+spec/spec_helper.rb
 spec/util_spec.rb
 Manifest.txt
