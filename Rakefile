@@ -2,8 +2,8 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "lib"))
 
 require "rubygems"
 
-package_name = "searchable_record"
 full_name = "SearchableRecord"
+package_name = "searchable_record"
 require "#{package_name}"
 version = SearchableRecord::VERSION
 
@@ -40,12 +40,10 @@ end
 
 desc "Find code smells"
 task :roodi do
-  sh("roodi '**/*.rb'")
+  sh %{roodi "**/*.rb"}
 end
 
 desc "Search unfinished parts of source code"
 task :todo do
   FileList["**/*.rb", "**/*.rdoc", "**/*.txt"].egrep /(TODO|FIXME)/
 end
-
-task :default => :spec
