@@ -3,6 +3,7 @@ lib/searchable_record.rb
 lib/searchable_record/core.rb
 lib/searchable_record/meta.rb
 lib/searchable_record/util.rb
+MIT-LICENSE.txt
 Rakefile
 README.rdoc
 spec/core_spec.rb
