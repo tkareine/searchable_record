@@ -19,7 +19,8 @@ control the items (records) shown in the resource's representation.
 
   developer "Tuomas Kareinen", "tkareine@gmail.com"
 
-  self.extra_deps = [["activesupport", ">= 2.1.0"]]
+  self.extra_deps << ["activesupport", ">= 2.1.0"]
+
   self.readme_file = "README.rdoc"
   self.history_file = "CHANGELOG.rdoc"
   self.extra_rdoc_files = FileList["*.rdoc"].to_a
