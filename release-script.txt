@@ -5,7 +5,7 @@ $EDITOR CHANGELOG.rdoc                  # describe changes
 git diff                                # review the changes
 rake publish_docs
 rake release VERSION=x.y.z
-git commit -am "Bump to release-x.y.z."
+git commit -am "Bump to release-x.y.z"
 git tag release-x.y.z
 git push
 git push --tags
