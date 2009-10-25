@@ -13,7 +13,7 @@ to the class that includes it. The method is a front-end to
 given rules and calls <tt>find</tt> accordingly, returning the results of
 <tt>find</tt>.
 
-The plugin is compatible with Ruby 1.9.1.
+The plugin is compatible with both Ruby 1.8 and 1.9.
 
 == A usage example
 
@@ -116,9 +116,10 @@ details.
 
 == Installation
 
-In order to install the plugin as a Ruby gem for a Rails application, edit
-the <tt>environment.rb</tt> file of the application to contain the following
-line:
+The plugin is available as a RubyGem from RubyForge[http://rubyforge.org/] and
+Gemcutter[http://gemcutter.org/]. In order to install the gem for a Rails
+application, edit the <tt>environment.rb</tt> file of the application to
+contain the following line:
 
   config.gem "searchable_record"
 
