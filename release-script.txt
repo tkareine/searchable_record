@@ -1,11 +1,10 @@
 In order to make a release, do
 
 $EDITOR lib/searchable_record/meta.rb   # update version number
-$EDITOR CHANGELOG.rdoc                  # describe changes
+$EDITOR CHANGELOG.rdoc                  # describe history summary
 git diff                                # review the changes
 rake publish_docs
 rake release VERSION=x.y.z
 git commit -am "Bump to release-x.y.z"
 git tag release-x.y.z
-git push
-git push --tags
+git push --tags origin master
