@@ -132,7 +132,7 @@ Then install the gem:
 
 Use git to get the source code for modifications and hacks:
 
-  $ git clone git://github.com/tuomas/searchable_record.git
+  $ git clone git://github.com/tkareine/searchable_record.git
 
 == Contacting
 
